@@ -18,6 +18,8 @@ services:
   server:
     build: ./server
     restart: always
+    environment:
+      NODE_ENV: production
     ports:
       - "4000:4000"
     depends_on:
