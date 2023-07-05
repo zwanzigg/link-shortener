@@ -11,7 +11,7 @@ import { v4 as uuidv4 } from "uuid";
 export class LinksService {
   constructor(
     @InjectRepository(Link)
-    private readonly linksRepository: Repository<Link>,
+    private readonly linksRepository: Repository<Link>
   ) {}
 
   public async getLinks(): Promise<Link[]> {
@@ -20,8 +20,19 @@ export class LinksService {
 
   public async createLink(link: CreateLinkDto): Promise<Link> {
     const guid = uuidv4();
+    const url = new URL(link.redirect_url).href;
+    const foundLink = await this.linksRepository.findOne({
+      where: [{ redirect_url: url }],
+    });
+    if (foundLink) {
+      throw new HttpException(
+        { message: "Link already exists" },
+        HttpStatus.BAD_REQUEST
+      );
+    }
+
     return this.linksRepository.save({
-      redirect_url: link.redirect_url,
+      redirect_url: url,
       shortcode_guid: guid,
       active: true,
     });
@@ -39,7 +50,7 @@ export class LinksService {
 
   public async updateLink(
     shortcode_guid: Link["shortcode_guid"],
-    updateData: UpdateLinkDto,
+    updateData: UpdateLinkDto
   ): Promise<UpdateResult> {
     return this.linksRepository.update({ shortcode_guid }, updateData);
   }

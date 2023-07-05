@@ -4,18 +4,9 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { ORMConfig } from "./ormconfig";
 import { LinksController } from "./links/links.controller";
 import { AppController } from "./app.controller";
-import { ServeStaticModule } from "@nestjs/serve-static";
-import { join } from "path";
 
 @Module({
-  imports: [
-    TypeOrmModule.forRoot(ORMConfig),
-    LinksModule,
-
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, "../..", "client/public"),
-    }),
-  ],
+  imports: [TypeOrmModule.forRoot(ORMConfig), LinksModule],
   controllers: [LinksController, AppController],
 })
 export class AppModule {}

@@ -8,7 +8,6 @@ export class AppController {
   @Get(":guid")
   public async get(@Param() params, @Request() req: Request, @Res() res: any) {
     const url = await this.service.getLink(params.guid);
-    // @ts-ignore
     res.redirect(url.redirect_url);
   }
 }

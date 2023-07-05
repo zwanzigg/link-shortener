@@ -1,4 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+  CreateDateColumn,
+} from "typeorm";
 
 @Entity()
 export class Link {
@@ -8,9 +14,15 @@ export class Link {
   @Column({ unique: true })
   shortcode_guid: string;
 
-  @Column()
+  @Column({ unique: true })
   redirect_url: string;
 
   @Column()
   active: boolean;
+
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
 }
