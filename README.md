@@ -2,6 +2,18 @@
 
 This is a simple links shortener, made with NestJS and React.
 
+Why Nest JS:
+- fast to learn;
+- easy to use;
+- dependency injection;
+- built-in support for almost everything (Swagger, TypeScript, testing, WebSockets, GraphQL, etc.).
+
+Why React:
+- quick and easy setup;
+- reusable components;
+- unidirectional data flow;
+- testing libraries and utilities.
+
 ## Usage
 1) Go to the root directory
 2) Run `docker-compose up -d`
