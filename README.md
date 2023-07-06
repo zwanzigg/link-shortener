@@ -26,3 +26,9 @@ Why React:
 
 ## Demo
 ![Demo](./assets/demo.gif)
+
+## API documentation
+Swagger documentation is available at `/api` endpoint of server app.
+
+Example:
+![Swagger](./assets/api-docs.png)
