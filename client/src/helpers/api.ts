@@ -27,12 +27,11 @@ export const redirectLink = async (guid: string) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
       },
-      redirect: 'manual',
     });
-    if (response.url) {
-      window.open(response.url, '_blank');
+    const data = await response.json();
+    if (response.ok && data.redirect_url) {
+      window.open(data.redirect_url, '_blank');
     } else {
       return handleError({
         message: 'URL for redirect is missing',
